@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = '/api';
 
 axios.interceptors.request.use((config) => {
-  if (localStorage.getItem('token')) { 
+  if (localStorage.getItem('token')) {
     config.headers.Authorization = localStorage.getItem('token')
   }
   return config;
@@ -23,6 +23,7 @@ Vue.use(ViewUI);
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 
+Vue.prototype.$bus = new Vue;
 new Vue({
   store,
   router,

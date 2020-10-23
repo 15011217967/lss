@@ -1,14 +1,25 @@
 <template>
   <div class="home">
    parent
-   <router-view />
+   <Button @click="ll = ll+1">按钮</Button>
+   <child />
+   <child2 />
   </div>
 </template>
 
 <script>
+import child from './child';
+import child2 from './child2';
 // @ is an alias to /src
 export default{
+  provide() {
+    return {
+      that: this
+    }
+  },
   components:{
+    child,
+    child2
   },
   computed: {
     name () {
@@ -21,7 +32,7 @@ export default{
   data () {
     return {
       isChildFlow: false,
-
+      ll:0
     }
   },
   created() {

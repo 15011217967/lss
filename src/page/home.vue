@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    {{ hh }}
+    {{ actionsName }}
      <Layout>
         <Sider ref="side1" hide-trigger collapsible :collapsed-width="78">
           <Menu :theme="theme" style="height:100vh;" :accordion="true" width="auto">
@@ -24,9 +26,11 @@
             <Button style="float:right;margin: 20px 20px 0 0;" @click="exit">退出</Button>
           </Header>
           <Breadcrumb :style="{margin: '20px 0 0 20px'}">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Components</BreadcrumbItem>
-            <BreadcrumbItem>Layout</BreadcrumbItem>
+            <BreadcrumbItem 
+              v-for="(barItem, barIndex) in barList"
+              :key="barIndex"
+              @click="handleBarItem(barIndex)"
+            >{{ barItem.name }}</BreadcrumbItem>
           </Breadcrumb>
           <div style="margin:20px;background:#fff;">
             <router-view />
@@ -37,6 +41,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default{
   components:{
   },
@@ -82,6 +87,18 @@ export default{
   computed:{
     menuList() {
       return this.res.data;
+    },
+    // hh() {
+    //   return this.$store.state.name
+    // },
+    ...mapState({
+      hh: state => state.name
+    }),
+    actionsName() {
+      return this.$store.state.actionsName
+    },
+    barList() {
+      return this.$store.state.barList
     }
   },
   methods:{

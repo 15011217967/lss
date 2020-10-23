@@ -29,8 +29,14 @@ export default {
     }
   },
   created() {
+    this.fn().then(res =>{
+      console.log(res)
+    })
   },
   methods:{
+    async fn() {
+      return 'aaa';
+    },
     // 登录
     submit() {
       const data = {
@@ -41,7 +47,6 @@ export default {
       this.$axios.post('/userManager/passageway/login', data).then(res=>{
         window.localStorage.setItem('token', res.data.data.token);
         this.$router.replace('/index');
-        
       })
     },   
   }
